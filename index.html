@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pacifica 2026 Hackathon Submissions</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { height: 100%; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0a0e1a url('bg.png') no-repeat center center / cover fixed;
+      background-attachment: fixed;
+      color: #e0e8f0;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 12px;
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .logo {
+      height: 48px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #7a8da8;
+      font-weight: 400;
+    }
+
+    .subtitle strong {
+      color: rgb(85, 195, 233);
+      font-weight: 600;
+    }
+
+    .filters {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: transparent;
+      flex-wrap: wrap;
+    }
+
+    .filter-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+
+    .search-wrap { margin-left: 8px; }
+
+    .search-input {
+      width: 200px;
+      padding: 8px 14px;
+      border: 1px solid rgba(85, 195, 233, 0.2);
+      border-radius: 20px;
+      background: rgba(15, 22, 42, 0.8);
+      color: #e0e8f0;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input::placeholder { color: #4a5568; }
+    .search-input:focus { border-color: rgb(85, 195, 233); }
+
+    .filter-btn {
+      padding: 8px 18px;
+      border: 1px solid rgb(85, 195, 233);
+      border-radius: 20px;
+      background: transparent;
+      color: rgb(85, 195, 233);
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      background: rgb(85, 195, 233);
+      color: #0a0e1a;
+    }
+
+    .filter-btn.active {
+      background: rgb(85, 195, 233);
+      border-color: rgb(85, 195, 233);
+      color: #0a0e1a;
+    }
+
+    .filter-btn-winners {
+      border-color: #f0c040;
+      color: #f0c040;
+    }
+
+    .filter-btn-winners:hover {
+      background: #f0c040;
+      color: #0a0e1a;
+    }
+
+    .filter-btn-winners.active {
+      background: #f0c040;
+      border-color: #f0c040;
+      color: #0a0e1a;
+    }
+
+    .filter-btn[data-track="trading"] { border-color: #ff9c40; color: #ff9c40; }
+    .filter-btn[data-track="trading"]:hover { background: #ff9c40; color: #0a0e1a; }
+    .filter-btn[data-track="trading"].active { background: #ff9c40; border-color: #ff9c40; color: #0a0e1a; }
+
+    .filter-btn[data-track="analytics"] { border-color: rgb(85, 195, 233); color: rgb(85, 195, 233); }
+    .filter-btn[data-track="analytics"]:hover { background: rgb(85, 195, 233); color: #0a0e1a; }
+    .filter-btn[data-track="analytics"].active { background: rgb(85, 195, 233); border-color: rgb(85, 195, 233); color: #0a0e1a; }
+
+    .filter-btn[data-track="defi"] { border-color: #00d2aa; color: #00d2aa; }
+    .filter-btn[data-track="defi"]:hover { background: #00d2aa; color: #0a0e1a; }
+    .filter-btn[data-track="defi"].active { background: #00d2aa; border-color: #00d2aa; color: #0a0e1a; }
+
+    .filter-btn[data-track="social"] { border-color: #b464ff; color: #b464ff; }
+    .filter-btn[data-track="social"]:hover { background: #b464ff; color: #0a0e1a; }
+    .filter-btn[data-track="social"].active { background: #b464ff; border-color: #b464ff; color: #0a0e1a; }
+
+    .filter-btn .track-count {
+      font-size: 12px;
+      opacity: 0.6;
+      margin-left: 4px;
+    }
+
+    main { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+    .track-section { margin-bottom: 48px; }
+
+    .track-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #c0d0e0;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(85, 195, 233, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .track-title .track-count {
+      font-size: 14px;
+      color: rgb(85, 195, 233);
+      background: rgba(85, 195, 233, 0.1);
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+
+    .track-icon { font-size: 24px; }
+
+    .prize-group { margin-bottom: 36px; }
+
+    .prize-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #7a8da8;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .prize-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 18, 32, 0.55);
+      border: 1px solid rgba(50, 70, 100, 0.3);
+      border-radius: 12px;
+      padding: 16px 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .grand-prize-row {
+      border-color: rgba(50, 70, 100, 0.3);
+    }
+
+    .prize-row-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .prize-row-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .prize-row-sub {
+      font-size: 13px;
+      color: #5a6a7a;
+    }
+
+    .prize-row-right {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .prize-cash {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f0c040;
+    }
+
+    .prize-sep {
+      color: #4a5568;
+      font-size: 16px;
+    }
+
+    .prize-pts {
+      font-size: 28px;
+      font-weight: 700;
+      color: rgb(85, 195, 233);
+    }
+
+    .prize-pts small {
+      font-size: 13px;
+      font-weight: 400;
+      margin-left: 2px;
+      opacity: 0.6;
+    }
+
+    .prize-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .prize-row-track {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .badge-trading-text { color: #8a9ab0; }
+    .badge-analytics-text { color: #8a9ab0; }
+    .badge-defi-text { color: #8a9ab0; }
+    .badge-social-text { color: #8a9ab0; }
+    .special-text { color: #8a9ab0; }
+
+    .prize-cash-sm {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f0c040;
+    }
+
+    .prize-pts-sm {
+      font-size: 18px;
+      font-weight: 700;
+      color: rgb(85, 195, 233);
+    }
+
+    @media (max-width: 600px) {
+      .prize-grid-2 { grid-template-columns: 1fr; }
+      .prize-cash, .prize-pts { font-size: 22px; }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: rgba(10, 18, 32, 0.55);
+      border: 1px solid rgba(50, 70, 100, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.2s, transform 0.2s;
+      backdrop-filter: blur(8px);
+    }
+
+    .card:hover {
+      border-color: rgba(60, 90, 130, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .project-name {
+      font-size: 17px;
+      font-weight: 600;
+      color: #ffffff;
+      word-break: break-word;
+    }
+
+    .track-badge {
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      width: fit-content;
+      font-weight: 500;
+    }
+
+    .badge-trading  { background: rgba(255,140,50,0.12); color: #ff9c40; }
+    .badge-analytics { background: rgba(85,195,233,0.12); color: rgb(85, 195, 233); }
+    .badge-defi     { background: rgba(0,210,170,0.12); color: #00d2aa; }
+    .badge-social   { background: rgba(180,100,255,0.12); color: #b464ff; }
+
+    .demo-btn {
+      display: inline-block;
+      padding: 7px 16px;
+      background: transparent;
+      border: 1px solid rgb(85, 195, 233);
+      border-radius: 8px;
+      color: rgb(85, 195, 233);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      width: fit-content;
+      transition: all 0.2s;
+      margin-top: auto;
+    }
+
+    .demo-btn:hover {
+      background: rgb(85, 195, 233);
+      color: #0a0e1a;
+    }
+
+    .no-demo {
+      font-size: 13px;
+      color: #4a5568;
+      margin-top: auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #4a5568;
+      font-size: 14px;
+      border-top: 1px solid rgba(85, 195, 233, 0.06);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Pacifica" class="logo">
+    <h1>2026 Hackathon Submissions</h1>
+  </header>
+
+  <nav class="filters">
+    <div class="filter-btns">
+      <button class="filter-btn active" data-track="all">All</button>
+      <button class="filter-btn filter-btn-winners" data-track="winners">Winners</button>
+      <button class="filter-btn" data-track="trading">Trading Applications</button>
+      <button class="filter-btn" data-track="analytics">Analytics</button>
+      <button class="filter-btn" data-track="defi">DeFi Composability</button>
+      <button class="filter-btn" data-track="social">Social</button>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="search" class="search-input" placeholder="Search..." autocomplete="off">
+    </div>
+  </nav>
+
+  <main>
+    <section class="track-section" id="winners" style="display:none;">
+      <h2 class="track-title">Winners</h2>
+
+      <div class="prize-group">
+        <h3 class="prize-label">Grand Prize &mdash; Best Overall</h3>
+        <div class="prize-row grand-prize-row">
+          <div class="prize-row-left">
+            <span class="prize-row-name">TBA</span>
+            <span class="prize-row-sub">1 winner &middot; Also receives track prize</span>
+          </div>
+          <div class="prize-row-right">
+            <span class="prize-cash">$5,000</span>
+            <span class="prize-sep">+</span>
+            <span class="prize-pts">30,000<small>pts</small></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prize-group">
+        <h3 class="prize-label">Track Winners</h3>
+        <div class="prize-grid-2">
+          <div class="prize-row">
+            <div class="prize-row-left">
+              <span class="prize-row-name">TBA</span>
+              <span class="prize-row-sub badge-trading-text">Trading Apps &amp; Bots</span>
+            </div>
+            <div class="prize-row-right">
+              <span class="prize-cash-sm">$2k</span>
+              <span class="prize-sep">+</span>
+              <span class="prize-pts-sm">14k</span>
+            </div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-row-left">
+              <span class="prize-row-name">TBA</span>
+              <span class="prize-row-sub badge-analytics-text">Analytics &amp; Data</span>
+            </div>
+            <div class="prize-row-right">
+              <span class="prize-cash-sm">$2k</span>
+              <span class="prize-sep">+</span>
+              <span class="prize-pts-sm">14k</span>
+            </div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-row-left">
+              <span class="prize-row-name">TBA</span>
+              <span class="prize-row-sub badge-social-text">Social &amp; Gamification</span>
+            </div>
+            <div class="prize-row-right">
+              <span class="prize-cash-sm">$2k</span>
+              <span class="prize-sep">+</span>
+              <span class="prize-pts-sm">14k</span>
+            </div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-row-left">
+              <span class="prize-row-name">TBA</span>
+              <span class="prize-row-sub badge-defi-text">DeFi Composability</span>
+            </div>
+            <div class="prize-row-right">
+              <span class="prize-cash-sm">$2k</span>
+              <span class="prize-sep">+</span>
+              <span class="prize-pts-sm">14k</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prize-group">
+        <h3 class="prize-label">Special Awards</h3>
+        <div class="prize-grid-2">
+          <div class="prize-row">
+            <div class="prize-row-left">
+              <span class="prize-row-name">TBA</span>
+              <span class="prize-row-sub special-text">Most Innovative</span>
+            </div>
+            <div class="prize-row-right">
+              <span class="prize-cash-sm">$1k</span>
+              <span class="prize-sep">+</span>
+              <span class="prize-pts-sm">7k</span>
+            </div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-row-left">
+              <span class="prize-row-name">TBA</span>
+              <span class="prize-row-sub special-text">Best UX</span>
+            </div>
+            <div class="prize-row-right">
+              <span class="prize-cash-sm">$1k</span>
+              <span class="prize-sep">+</span>
+              <span class="prize-pts-sm">7k</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="track-section" id="trading">
+  <h2 class="track-title">Trading Applications &amp; Bots</h2>
+  <div class="grid">
+    <div class="card">
+      <h3 class="project-name">AgentHub</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://www.youtube.com/watch?v=wonSFYsyLCQ" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">AIRifica</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1whniWC7E2CNo647pQUKbQc4sVoFxbQqJ/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Aphelion</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/drive/folders/1j8JbUHEc6FN_998f3eglFuXGm40DcCEN?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">AXON</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/drive/folders/1vf8_EXChqTJB5AvbXEWKtJar_lKUfSyZ?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Callydus Trading</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1DEKb5JE6_oo7j4OECDK3S9BbuZ9HOsJ-/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Castor</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/167Bkjpk_dkOmetpVQXkFebwTGX6bA1yO/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Cede Flow</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1KjSWlSTgpyE9IuuMIITrRS0yzH6cJiV0/view" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">ClashX</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1-KpiAsDphF3twqQGXaiCKVbIhnpum-G8/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Clawscanner AI</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://youtu.be/C4XtN1zN0OA?si=9vR5M43YOVrvcM5D" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">FundindDesk.io</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1cTnKCU6U0bwLQBRedZLpmv3V13g6hWP9/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Hinata</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1zw5QZVcQi760XIKNmfiWVuVw8NKoFwhS/view?usp=drivesdk" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">HyprEarn</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1ZuYm6-U13LBNRZtBTT0eQrnwCDvyfypm/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">JoyTrade</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://docs.google.com/videos/d/1wzqKToiwjlmkERnhjiGzI9d-rCzmJhZ7c0eBFaxXZKw/edit?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">KBOT TRADING</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1IBeBwMJQgkbeL9zrWnSZl-kVyByLf-X4/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Kromosom</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://www.youtube.com/watch?v=kd5vfdSFx1g" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">L3quifi</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <span class="no-demo">No demo</span>
+    </div>
+    <div class="card">
+      <h3 class="project-name">myBOON</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://youtu.be/tFmL9bRbdxg" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">OceanPulse</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://youtu.be/PevFIcr1y5M" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">OceanX</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1r1olZrfAhmDNK-Irp5qPJ6khmXKOa8an/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PacFi - AI</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/drive/folders/1DZ-93uNHScVC9bo6uYgckAjF_AY0ljZ2?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica CLI</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/drive/folders/1UEt2ydwXg3rKjXUACcV7kGGbGwuiqRxv?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Guard</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <span class="no-demo">No demo</span>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica MCP</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://youtu.be/vPk1GxwZVUw" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Pilot</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1FN_iipxtCmeL7gvyKHVMRocOp0ZYZrAe/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica-Sentinel</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <span class="no-demo">No demo</span>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PacificaCopy</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1LFBe88yTeze_iqc3NGKWJ1_P37Be_d4J/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PacificaKorn</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1RnE36WfrbRGVDVKGBoFNnV3x8kXsO2LC/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PacificOcean</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://youtu.be/GUhxqV7QQ-0" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PacifiQuant</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/12ZNhs8vOsvPD9SjsnTgH3soLH1oGNdNZ/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PacifiX</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1QrpxaRHTzOKWqi359aOUf4QnI9IRxScC/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PaciPort</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://youtu.be/G3rCKOliOI4" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pilot Pulse</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://youtu.be/5T3G2qPUamA" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">RIPCORD</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://youtu.be/GDll3zVRQ3w" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Riptide</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1ntHKdJvX0BXcEb6QOuQHk1VesO3Iu0cW/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">RustPacifica</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <span class="no-demo">No demo</span>
+    </div>
+    <div class="card">
+      <h3 class="project-name">SafeYield AI</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://youtube.com/shorts/O1OpVmRsImo?si=An-gtIQOs4IfxwD7" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Sentinel</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1O2wTeP-L2vJeQa-DE4FjeUIcHvMEwQQc/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Settler Engine</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://youtube.com/shorts/VHROnRpCcgI?si=kJ-pzpmvX4Z2jMHE" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Shadow Bot</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1hquszZxJLQiMiKAx82NLZb1luCVaryuu/view?usp=drivesdk" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">The Scavenger</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1mtu9QCxjcSvlaomzsqXcavwhxMQCkSzv/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">the sumber rejeki</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/18Fp4J5C-grSSam9-ZacBRjuM6Tp4x30i/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Tidal</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://drive.google.com/file/d/1R2ZVpPgdxatXHY7BYP_vWMic-8-NWCQ3/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">TP/SL Manager</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://youtu.be/qnuv99Y7arQ" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Trident_bot</h3>
+      <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+      <a href="https://youtu.be/g4Y1yeBG8d4" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+  </div>
+</section>
+<section class="track-section" id="analytics">
+  <h2 class="track-title">Analytics &amp; Data</h2>
+  <div class="grid">
+    <div class="card">
+      <h3 class="project-name">54STRATEGY X PACIFICA</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1zQqaBuE5K_k9YUibX8r8sLTcDGpDR609/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Alpha Compass</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://youtu.be/du-_PydJjLE" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">BOOBAnalytics</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/12yzXy5VG2F91BHDoLSC-tMKqJzDfElsS/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">CredTrade AI — Proof of Skill for Traders</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://youtu.be/nvolTrtDAoI" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Datatides</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/drive/folders/1RyanKCt2ke8k8k3NakQRtel7n_D_IGYB?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">FUNDING EDGE</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1jFQ9eedZuVH1R0Q0I0XC7mfrw4mrOxUU/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">https://pacificaflow.xyz/</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1xn9Z0yYQ2mCgaUsQAttynvcheq_y-_IK/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">kanth</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <span class="no-demo">No demo</span>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Opipolix Pacifica</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1pqiwKEgkqqHQ1h3ll5i0qPN1npNm0qU_/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PacDash</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1d4kT3XDokL7D7EisuVoqkQjI70eTUuTY/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PAcifia intelligence</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1skjw6TDXZ534uuBCtx9UYPb2NpErm1Af/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Account Health</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1OT8ITFd2PH7a0rXxFClZNBzcxg0QLBjB/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Analytics</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1ope0EsTdJP_snOebnqWm5FXqEwG0az2e/view" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Analytics</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1mjNO6w8JInx3fu8WljIJErH_uFIaiweV/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica copilot</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/drive/folders/1A_-3DlL1MFQ9ogFu37x9TLzOc_w3cFbm" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Data</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/16EGYdnHQ_1zQdi82RTahTIFjY3z-0onn/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Fantasy League</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://www.loom.com/share/224d861c7e3b4402b74899b9354e10ee" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Intelligence Terminal</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <span class="no-demo">No demo</span>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Nexus</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/drive/folders/1co-4RhEJTIhviUGQ3X3aS_4Uh7NKzgif?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica profit pulse</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1VUSV2LSIZFPlNlqDN7L3iaOeD2gdYEg4/view?usp=drivesdk" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Watch</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1516XlcRkGFWoo3tyQ8uLJmM9PpjGj60q/view?pli=1" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Whale Watcher</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/drive/folders/1ZrCxcYuaKo-LFNstjpn1PcVTzH4m-_lI?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica-MCP</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/drive/u/1/folders/133ebTaPWyIByRZYJ97ZOCKYwUZiCbHsp" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PACIFICAEDGE</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://youtu.be/gq4jwy5xdB0" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PACIFICALENS</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1FdU8-d5p6OpSpaEA2yfQRbshkQpzuDmW/view" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Perp Copilot</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://youtu.be/Mc-7FhCqsn0" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PerpFlow - Predictive Orderflow Analytics Engine</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/drive/folders/1eDE8eB9ZhFsujjG7Y5bl4iTW-WnrP4ZH?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Perps Lens</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1uCdnES31rq4bSUeeM_ygPT7Tc-fDXpZB/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">RiskDesk</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://youtu.be/Fgqd-XjWAi8?si=CYkwA8HOCiKed2Vy" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">RiskLab</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://youtu.be/Gap-aycvhws?si=l2SK83uSogxamtsq" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">RiskSentinel</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1ky1-MdmBzF0ahYd1V3l0uH6-6XyZ66Wh/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Sentra terminal</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/drive/folders/1ul-gwYbDlZOTUumCep6z499kvd0tUgnX?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Shark Council</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1yYBI1L5BqNfrdwx5F3UbqOUEmbA912Kq/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Shoal</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://youtu.be/DtzJJjM0QTM?si=5tObKZxOeMAuc3aa" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">skew_X</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1LYj9xWOmF_yw_YbXFwwQzGgs0zUZyY3n/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">SomniaTrace</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://www.loom.com/share/aeb67db1c35b42cc84ef07bad08bb1dd" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Undertow</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1TblKo5Bj6a30_K5nowKgeyPn_X10lSHk/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">VoidDrop</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1lL_9CBncYkUWd2gtO2V4vJT44-f7t_ea/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Whale Sight</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/19hCxhabxQhatRmTeQJoQH6TOWry4LWZr/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Whale Tracker</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/1f1MlWnJXdupgPUPSBvZaP2Ll4y7avMiZ/view" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">whale watcher</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <a href="https://drive.google.com/file/d/10zOGFB6_TYW_z9Gt-ivvkauG6D_KXpM4/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">WhaleSight</h3>
+      <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+      <span class="no-demo">No demo</span>
+    </div>
+  </div>
+</section>
+<section class="track-section" id="defi">
+  <h2 class="track-title">DeFi Composability</h2>
+  <div class="grid">
+    <div class="card">
+      <h3 class="project-name">Abyssal.fi</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://youtu.be/O8W4net8MZ0" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Aegis</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/file/d/1doAtQMjKIsKmeIRmL4TXf2tDqEW359ls/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">aegis-finance</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://www.loom.com/share/1ab0bb5ca5724d019ea142fff3522836" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Alpha Port</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/file/d/1tGT4taPtBMGW19YLUaeLueL_wq2Gh6bB/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Delora Protocol</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/file/d/1eNnNYH7revP4qn56oQvZbJs4hMmuKzax/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">DeltaVault</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://youtu.be/21qwWYFNohA" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Dol</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/file/d/1tcNj7AtuAlv9_v1F6f7i0i8Pogv2SdVx/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Sigil</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/file/d/1oo3vzeghnqzpZWE2jxTZANAfZUP_Vb34/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">ParivaDex</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/drive/folders/1jAIoSA50pw1_Hu5-UGGzx0JsN0sddimf?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PayFlow</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/file/d/1X3BF9EIAlgLxbFYSkBIRxMibLoN-oFSY/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Perennia</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/file/d/1sBje26XKP4N8TjwGRZXwmBFbWMLRfW7f/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PerpGuard.</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/file/d/1GrUUSRHcs3SEm0Zc5SqVrhDKcUxucDWV/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PerpsDAO Vault</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://youtu.be/zxSU-yb5WSo?si=7GXrVIYOv0X7NDE2" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PerpShield</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://youtu.be/xWNaWY6o4IM" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PerpYield</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/drive/folders/1ITvI92Wh1hUl1som5TponnNBh5sz6XaF?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PrivateDAO</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://youtu.be/cwsPpNLiwbo?feature=shared" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">SafeYield AI – Secure Cross-Chain DeFi Strategy Manager</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/file/d/1Z20-M15YFZFUDtMukZRfaUsbXTy4Hy2Q/view?usp=drivesdk" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Sailing The Pacifica</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/file/d/15Rk3cvEOehq0qZtzEE-KWft2ekZ6jKA_/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">SNOWBALL</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://drive.google.com/file/d/1U0n-GT6lqoRVAp__zM04pttIYavII-FP/view?usp=share_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Web3ID</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://youtu.be/WVd8Uq59klI?si=jzGVF9RF_bTfZXvm" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Zerova</h3>
+      <span class="track-badge badge-defi">DeFi Composability</span>
+      <a href="https://youtu.be/yfYnknYCFBA" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+  </div>
+</section>
+<section class="track-section" id="social">
+  <h2 class="track-title">Social &amp; Gamification</h2>
+  <div class="grid">
+    <div class="card">
+      <h3 class="project-name">_PHALANX</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/file/d/1z7IpJkxBehV-YvaeaMpdwLsoR35Ck59Q/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">AlphaArena</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/file/d/1qj5dI-9soLEDJxkLhqRcNnwkd2Vbt5zY/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Blob Arena</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/file/d/1SXeIlDGviV_FTVHPTf45S0AkmavdeSs3/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Clash of Perps</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://youtu.be/AzipxkPKp2k" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Copy Perp</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/file/d/16cq_OTOFgJcjkaSbqGyBKCxpGnJ4gRWi/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Famine Forest</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <span class="no-demo">No demo</span>
+    </div>
+    <div class="card">
+      <h3 class="project-name">MemeGame: Greedy World</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://youtu.be/sVHdxuNldtw" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PaciBooba Terminal</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/file/d/1AZwzRYxI_O3sPGzQzAGIgWer8NJ-4jHE/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica Pulse</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/file/d/18tg7LVohyWT7Nt6MTqRzrJHJuFuMs66_/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Pacifica-Colosseum</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/file/d/1dV1-sIhmZphUVrGvJbHpXWNMlTyma24P/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PacificaBinary</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/file/d/1HtQa4N-HuY0lMOUWW1_8SZq3EI5tqY-T/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PacificaRace</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/file/d/1l5fMcMOHdwrXq6Jpyc5nULrkPMsmfgAs/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">PacificOcean - Prediction Market</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://youtu.be/JyUE9IA33I4" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Picasso</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/file/d/1SePN1ZOu9WFTNHXiHuolIbqYUUtWxox4/view" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Predica</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/drive/folders/1GsIPbfuG9WH46lMpfkTmKkQa0dByD8vQ?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">SentimentPerps</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/file/d/11Xus2YkFGzjVotMsN15NmhdEekZCbmP_/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">THESES</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/file/d/1PA-lle0n3DkDGUN7NWVNOYO6YChOCFtx/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+    <div class="card">
+      <h3 class="project-name">Tidal Wars</h3>
+      <span class="track-badge badge-social">Social &amp; Gamification</span>
+      <a href="https://drive.google.com/drive/folders/1qFMWKH25bZBzvTe21YpgzQ7km6AqB7oK?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+
+  <script>
+    let activeTrack = 'all';
+    const searchInput = document.getElementById('search');
+
+    function applyFilters() {
+      const query = searchInput.value.toLowerCase().trim();
+      document.querySelectorAll('.track-section').forEach(section => {
+        const isWinners = section.id === 'winners';
+        const trackMatch = activeTrack === 'winners' ? isWinners : (!isWinners && (activeTrack === 'all' || section.id === activeTrack));
+        if (isWinners) {
+          section.style.display = (activeTrack === 'winners') ? '' : 'none';
+          return;
+        }
+        let visibleCards = 0;
+        section.querySelectorAll('.card').forEach(card => {
+          const name = card.querySelector('.project-name').textContent.toLowerCase();
+          const match = trackMatch && (!query || name.includes(query));
+          card.style.display = match ? '' : 'none';
+          if (match) visibleCards++;
+        });
+        section.style.display = (trackMatch && visibleCards > 0) ? '' : 'none';
+      });
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeTrack = btn.dataset.track;
+        applyFilters();
+      });
+    });
+
+    searchInput.addEventListener('input', applyFilters);
+  </script>
+</body>
+</html>
