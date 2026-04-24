@@ -118,6 +118,22 @@
       color: #0a0e1a;
     }
 
+    .filter-btn-finalists {
+      border-color: #c0c0c0;
+      color: #c0c0c0;
+    }
+
+    .filter-btn-finalists:hover {
+      background: #c0c0c0;
+      color: #0a0e1a;
+    }
+
+    .filter-btn-finalists.active {
+      background: #c0c0c0;
+      border-color: #c0c0c0;
+      color: #0a0e1a;
+    }
+
     .filter-btn[data-track="trading"] { border-color: #ff9c40; color: #ff9c40; }
     .filter-btn[data-track="trading"]:hover { background: #ff9c40; color: #0a0e1a; }
     .filter-btn[data-track="trading"].active { background: #ff9c40; border-color: #ff9c40; color: #0a0e1a; }
@@ -386,6 +402,7 @@
     <div class="filter-btns">
       <button class="filter-btn active" data-track="all">All</button>
       <button class="filter-btn filter-btn-winners" data-track="winners">Winners</button>
+      <button class="filter-btn filter-btn-finalists" data-track="finalists">Finalists</button>
       <button class="filter-btn" data-track="trading">Trading Applications</button>
       <button class="filter-btn" data-track="analytics">Analytics</button>
       <button class="filter-btn" data-track="defi">DeFi Composability</button>
@@ -490,6 +507,101 @@
               <span class="prize-pts-sm">7k</span>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+    <section class="track-section" id="finalists" style="display:none;">
+      <h2 class="track-title">Finalists</h2>
+      <div class="grid">
+        <div class="card">
+          <h3 class="project-name">ClashX</h3>
+          <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/1-KpiAsDphF3twqQGXaiCKVbIhnpum-G8/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://clash-x.vercel.app" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">Clash of Perps</h3>
+          <span class="track-badge badge-social">Social &amp; Gamification</span>
+          <div class="card-links"><a href="https://youtu.be/AzipxkPKp2k" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://clashofperps.fun" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">Undertow</h3>
+          <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/1TblKo5Bj6a30_K5nowKgeyPn_X10lSHk/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://under-tow.vercel.app" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">Pacifica CLI</h3>
+          <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+          <div class="card-links"><a href="https://drive.google.com/drive/folders/1UEt2ydwXg3rKjXUACcV7kGGbGwuiqRxv?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://pacifica-intelligence.pages.dev" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">Perennia</h3>
+          <span class="track-badge badge-defi">DeFi Composability</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/1sBje26XKP4N8TjwGRZXwmBFbWMLRfW7f/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://www.perennia.xyz/" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">PacifiQuant</h3>
+          <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/12ZNhs8vOsvPD9SjsnTgH3soLH1oGNdNZ/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">Pacifica Analytics</h3>
+          <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/1mjNO6w8JInx3fu8WljIJErH_uFIaiweV/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://pacifica-frontend-production.up.railway.app/" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">OceanX</h3>
+          <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/1r1olZrfAhmDNK-Irp5qPJ6khmXKOa8an/view?usp=drive_link" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://oceanxx.xyz/" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">Picasso</h3>
+          <span class="track-badge badge-social">Social &amp; Gamification</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/1SePN1ZOu9WFTNHXiHuolIbqYUUtWxox4/view" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://pacifica-picasso.vercel.app/" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">Castor</h3>
+          <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/167Bkjpk_dkOmetpVQXkFebwTGX6bA1yO/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://castor-fe.merembablas.workers.dev/" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">Shark Council</h3>
+          <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/1yYBI1L5BqNfrdwx5F3UbqOUEmbA912Kq/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://shark-council-app-pacifica.vercel.app/" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">PACIFICALENS</h3>
+          <span class="track-badge badge-analytics">Analytics &amp; Data</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/1FdU8-d5p6OpSpaEA2yfQRbshkQpzuDmW/view" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://www.pacificalens.xyz" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">PaciBooba Terminal</h3>
+          <span class="track-badge badge-social">Social &amp; Gamification</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/1AZwzRYxI_O3sPGzQzAGIgWer8NJ-4jHE/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://pacibooba.vercel.app/" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">_PHALANX</h3>
+          <span class="track-badge badge-social">Social &amp; Gamification</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/1z7IpJkxBehV-YvaeaMpdwLsoR35Ck59Q/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://phalanx.amos.wtf" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">PacifiX</h3>
+          <span class="track-badge badge-trading">Trading Applications &amp; Bots</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/1QrpxaRHTzOKWqi359aOUf4QnI9IRxScC/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://pacifix.onrender.com/" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">Sailing The Pacifica</h3>
+          <span class="track-badge badge-defi">DeFi Composability</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/15Rk3cvEOehq0qZtzEE-KWft2ekZ6jKA_/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://stp.pyk009.duckdns.org/" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">Dol</h3>
+          <span class="track-badge badge-defi">DeFi Composability</span>
+          <div class="card-links"><a href="https://drive.google.com/file/d/1tcNj7AtuAlv9_v1F6f7i0i8Pogv2SdVx/view?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://dol-finance.vercel.app" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
+        </div>
+        <div class="card">
+          <h3 class="project-name">ParivaDex</h3>
+          <span class="track-badge badge-defi">DeFi Composability</span>
+          <div class="card-links"><a href="https://drive.google.com/drive/folders/1jAIoSA50pw1_Hu5-UGGzx0JsN0sddimf?usp=sharing" target="_blank" rel="noopener" class="demo-btn">Watch Demo</a><a href="https://parivadex.vercel.app" target="_blank" rel="noopener" class="repo-btn">View Project</a></div>
         </div>
       </div>
     </section>
@@ -1149,10 +1261,10 @@
     function applyFilters() {
       const query = searchInput.value.toLowerCase().trim();
       document.querySelectorAll('.track-section').forEach(section => {
-        const isWinners = section.id === 'winners';
-        const trackMatch = activeTrack === 'winners' ? isWinners : (!isWinners && (activeTrack === 'all' || section.id === activeTrack));
-        if (isWinners) {
-          section.style.display = (activeTrack === 'winners') ? '' : 'none';
+        const isSpecial = section.id === 'winners' || section.id === 'finalists';
+        const trackMatch = isSpecial ? (section.id === activeTrack) : (activeTrack !== 'winners' && activeTrack !== 'finalists' && (activeTrack === 'all' || section.id === activeTrack));
+        if (isSpecial) {
+          section.style.display = (section.id === activeTrack) ? '' : 'none';
           return;
         }
         let visibleCards = 0;
