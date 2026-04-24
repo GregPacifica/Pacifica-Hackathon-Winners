@@ -9,7 +9,7 @@ After weeks of building, the Pacifica 2026 Hackathon has officially wrapped. We'
 ## Grand Prize — Best Overall
 
 **ClashX** — $5,000 + 30,000 pts
-> Also awarded: Trading Apps & Bots Track Winner + Best UX
+> Also awarded: Trading Apps & Bots Track Winner
 
 ---
 
@@ -25,7 +25,7 @@ After weeks of building, the Pacifica 2026 Hackathon has officially wrapped. We'
 ## Special Awards — $1,000 + 7,500 pts each
 
 **Most Innovative** → Perennia
-**Best UX** → ClashX
+**Best UX** → Pacifica Analytics
 
 ---
 
